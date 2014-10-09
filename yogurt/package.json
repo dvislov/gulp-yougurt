@@ -1,0 +1,30 @@
+{
+  "name": "yogurt",
+  "version": "0.0.0",
+  "description": "Front-End model for the assembly",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vdv73rus/gulp-yougurt.git"
+  },
+  "keywords": [
+    "gulp",
+    "front-end",
+    "sass",
+    "jade",
+    "coffee"
+  ],
+  "author": "Dmitry Vislov <vdv73rus@gmail.com> (http://vdv73.ru/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vdv73rus/gulp-yougurt/issues"
+  },
+  "homepage": "https://github.com/vdv73rus/gulp-yougurt",
+  "devDependencies": {
+    "coffee-script": "^1.8.0",
+    "gulp": "^3.8.8"
+  }
+}
