@@ -13,6 +13,7 @@ gulp.task 'connect', ->
 
 gulp.task 'jade-develop', ->
   gulp.src config.paths.jade.src
+    .pipe plugins.plumber()
     .pipe plugins.jade
       pretty: true
     .pipe gulp.dest config.paths.jade.develop_compile
