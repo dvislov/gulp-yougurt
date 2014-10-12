@@ -2,5 +2,7 @@ webserver:
   root_path: "../develop"
   port: 8000
 
-test:
-  sub: 'here'
+paths:
+  jade:
+    src: '../src/templates/*.jade'
+    develop_compile: '../develop'
