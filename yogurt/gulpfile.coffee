@@ -1,8 +1,14 @@
-gulp = require('gulp')
-jade = require('gulp-jade')
+fs = require 'fs'
+yaml = require 'js-yaml'
+
+gulp = require 'gulp'
+jade = require 'gulp-jade'
+
+config = yaml.load(fs.readFileSync("config.yml", "utf8"))
 
 gulp.task 'default', ->
   console.log "It's gulp, bitch!"
+  console.log config.test.sub
 
 gulp.task 'jade', ->
   gulp.src '../src/templates/*.jade'
