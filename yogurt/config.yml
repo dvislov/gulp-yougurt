@@ -6,3 +6,4 @@ paths:
   jade:
     src: '../src/templates/*.jade'
     develop_compile: '../develop'
+    develop_production: '../production'
