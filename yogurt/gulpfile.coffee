@@ -32,6 +32,7 @@ gulp.task 'jade-production', ->
 
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade-develop']
+  gulp.watch config.paths.jade.src_shared, ['jade-develop']
   return
 
 gulp.task 'default', [
