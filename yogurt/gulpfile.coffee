@@ -1,14 +1,22 @@
 fs = require 'fs'
 yaml = require 'js-yaml'
 
+connect = require 'gulp-connect'
+
 gulp = require 'gulp'
 jade = require 'gulp-jade'
 
 config = yaml.load(fs.readFileSync("config.yml", "utf8"))
 
-gulp.task 'default', ->
-  console.log "It's gulp, bitch!"
-  console.log config.test.sub
+gulp.task 'connect', ->
+  connect.server
+    root: config.webserver.root_path
+    port: config.webserver.port
+    livereload: true
+
+gulp.task 'default', [
+  'connect'
+]
 
 gulp.task 'jade', ->
   gulp.src '../src/templates/*.jade'

@@ -1,2 +1,6 @@
+webserver:
+  root_path: "../develop"
+  port: 8000
+
 test:
   sub: 'here'
