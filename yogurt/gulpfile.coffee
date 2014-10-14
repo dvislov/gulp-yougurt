@@ -19,6 +19,7 @@ gulp.task 'jade-develop', ->
     .pipe plugins.plumber()
     .pipe plugins.jade
       pretty: true
+    .pipe plugins.duration('jade templates')
     .pipe gulp.dest config.paths.jade.develop_compile
     .pipe plugins.connect.reload()
 
