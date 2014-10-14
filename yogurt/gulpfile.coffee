@@ -19,7 +19,7 @@ gulp.task 'jade-develop', ->
     .pipe plugins.plumber()
     .pipe plugins.jade
       pretty: true
-    .pipe plugins.duration('jade templates')
+    .pipe plugins.duration('jade develop templates')
     .pipe gulp.dest config.paths.jade.develop_compile
     .pipe plugins.connect.reload()
 
@@ -28,12 +28,24 @@ gulp.task 'jade-production', ->
     .pipe plugins.plumber()
     .pipe plugins.jade
       pretty: false
+    .pipe plugins.duration('jade production templates')
     .pipe gulp.dest config.paths.jade.develop_production
 
+
+# Styles compilation
+
+gulp.task 'sass-develop', ->
+  gulp.src config.paths.sass.src
+    .pipe plugins.plumber()
+    .pipe plugins.rubySass()
+    .pipe plugins.duration('sass develop compilation')
+    .pipe gulp.dest config.paths.sass.develop_compile
+    .pipe plugins.connect.reload()
 
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade-develop']
   gulp.watch config.paths.jade.src_shared, ['jade-develop']
+  gulp.watch config.paths.sass.base, ['sass-develop']
   return
 
 gulp.task 'default', [

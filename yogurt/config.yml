@@ -8,3 +8,8 @@ paths:
     src_shared: '../src/templates/shared/*.jade'
     develop_compile: '../develop'
     develop_production: '../production'
+
+  sass:
+    base: '../src/assets/stylesheets/*.sass'
+    src: '../src/assets/stylesheets/application.sass'
+    develop_compile: '../develop/css/'

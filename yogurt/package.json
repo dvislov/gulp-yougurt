@@ -31,7 +31,7 @@
     "gulp-jade": "^0.8.0",
     "gulp-load-plugins": "^0.7.0",
     "gulp-plumber": "^0.6.6",
-    "gulp-sass": "^1.1.0",
+    "gulp-ruby-sass": "^0.7.1",
     "js-yaml": "^3.2.2"
   }
 }
