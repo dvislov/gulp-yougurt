@@ -1,7 +1,7 @@
 body {
-  background-color: #ccc; }
+  background-color: #ccc;
+  -webkit-transition: all 1s ease;
+          transition: all 1s ease; }
 
 body {
   color: #990000; }
-
-/*# sourceMappingURL=application.css.map */

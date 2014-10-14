@@ -38,6 +38,7 @@ gulp.task 'sass-develop', ->
   gulp.src config.paths.sass.src
     .pipe plugins.plumber()
     .pipe plugins.rubySass()
+    .pipe plugins.autoprefixer()
     .pipe plugins.duration('sass develop compilation')
     .pipe gulp.dest config.paths.sass.develop_compile
     .pipe plugins.connect.reload()
