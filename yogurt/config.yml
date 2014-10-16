@@ -12,4 +12,11 @@ paths:
   sass:
     base: '../src/assets/stylesheets/*.sass'
     src: '../src/assets/stylesheets/application.sass'
-    develop_compile: '../develop/css/'
+    develop_compile: '../develop/css'
+    production_compile: '../production/css'
+
+  images:
+    sprite:
+      src: '../src/assets/images/sprite/*.png'
+      develop_compile_images: '../develop/images'
+      develop_compile_styles: '../src/assets/stylesheets/'

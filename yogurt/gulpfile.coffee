@@ -43,10 +43,48 @@ gulp.task 'sass-develop', ->
     .pipe gulp.dest config.paths.sass.develop_compile
     .pipe plugins.connect.reload()
 
+gulp.task 'sass-production', ->
+  gulp.src config.paths.sass.src
+    .pipe plugins.plumber()
+    .pipe plugins.rubySass()
+    .pipe plugins.autoprefixer()
+    .pipe plugins.csso()
+    .pipe plugins.duration('sass production compilation')
+    .pipe gulp.dest config.paths.sass.production_compile
+
+
+# Compile images sprite
+spritesmith = require 'gulp.spritesmith'
+# TODO: make this require from gulp-load-plugins
+
+gulp.task 'sprite-develop', ->
+  spriteData = gulp.src(config.paths.images.sprite.src).pipe(plugins.plumber())
+    .pipe plugins.duration('sprite develop compilation')
+    .pipe(spritesmith(
+      imgName: 'sprite.png'
+      cssName: 'sprite.sass'
+      cssFormat: 'sass'
+      padding: 10
+      algorithm: 'binary-tree'
+    ))
+
+  spriteData.img
+    .pipe plugins.plumber()
+    .pipe plugins.duration('sprite develop images compilation')
+    .pipe gulp.dest config.paths.images.sprite.develop_compile_images
+    .pipe plugins.connect.reload()
+  spriteData.css
+    .pipe plugins.plumber()
+    .pipe plugins.duration('sprite develop styles compilation')
+    .pipe gulp.dest config.paths.images.sprite.develop_compile_styles
+    .pipe plugins.connect.reload()
+
+
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade-develop']
   gulp.watch config.paths.jade.src_shared, ['jade-develop']
   gulp.watch config.paths.sass.base, ['sass-develop']
+  gulp.watch config.paths.images.sprite.src, ['sprite-develop', 'sass-develop']
   return
 
 gulp.task 'default', [
@@ -56,4 +94,5 @@ gulp.task 'default', [
 
 gulp.task 'production', [
   'jade-production'
+  'sass-production'
 ]
