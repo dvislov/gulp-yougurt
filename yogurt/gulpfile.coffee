@@ -23,14 +23,6 @@ gulp.task 'jade-develop', ->
     .pipe gulp.dest config.paths.jade.develop_compile
     .pipe plugins.connect.reload()
 
-gulp.task 'jade-production', ->
-  gulp.src config.paths.jade.src
-    .pipe plugins.plumber()
-    .pipe plugins.jade
-      pretty: false
-    .pipe plugins.duration('jade production templates')
-    .pipe gulp.dest config.paths.jade.develop_production
-
 
 # Styles compilation
 
@@ -42,15 +34,6 @@ gulp.task 'sass-develop', ->
     .pipe plugins.duration('sass develop compilation')
     .pipe gulp.dest config.paths.sass.develop_compile
     .pipe plugins.connect.reload()
-
-gulp.task 'sass-production', ->
-  gulp.src config.paths.sass.src
-    .pipe plugins.plumber()
-    .pipe plugins.rubySass()
-    .pipe plugins.autoprefixer()
-    .pipe plugins.csso()
-    .pipe plugins.duration('sass production compilation')
-    .pipe gulp.dest config.paths.sass.production_compile
 
 
 # Compile images sprite
@@ -80,37 +63,11 @@ gulp.task 'sprite-develop', ->
     .pipe gulp.dest config.paths.images.sprite.develop_compile_styles
     .pipe plugins.connect.reload()
 
-gulp.task 'sprite-production', ->
-  spriteData = gulp.src(config.paths.images.sprite.src).pipe(plugins.plumber())
-    .pipe plugins.duration('sprite production compilation')
-    .pipe(spritesmith(
-      imgName: 'sprite.png'
-      cssName: 'sprite.sass'
-      imgPath: '../images/sprite.png'
-      cssFormat: 'sass'
-      padding: 10
-      algorithm: 'binary-tree'
-    ))
-
-  spriteData.img
-    .pipe plugins.plumber()
-    .pipe plugins.duration('sprite production images compilation')
-    .pipe gulp.dest config.paths.images.sprite.production_compile_images
-    .pipe plugins.connect.reload()
-  spriteData.css
-    .pipe plugins.plumber()
-    .pipe plugins.duration('sprite production styles compilation')
-    .pipe gulp.dest config.paths.images.sprite.production_compile_styles
-    .pipe plugins.connect.reload()
-
 
 # copy static assets
 gulp.task 'copy-static-images-develop', ->
   gulp.src config.paths.images.static.src
     .pipe gulp.dest config.paths.images.static.develop
-gulp.task 'copy-static-images-production', ->
-  gulp.src config.paths.images.static.src
-    .pipe gulp.dest config.paths.images.static.production
 
 
 gulp.task 'watch', ->
@@ -130,9 +87,4 @@ gulp.task 'assets-develop', [
   'copy-static-images-develop'
 ]
 
-gulp.task 'production', [
-  'copy-static-images-production'
-  'jade-production'
-  'sprite-production'
-  'sass-production'
-]
+gulp.task 'production', []
