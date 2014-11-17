@@ -80,6 +80,29 @@ gulp.task 'sprite-develop', ->
     .pipe gulp.dest config.paths.images.sprite.develop_compile_styles
     .pipe plugins.connect.reload()
 
+gulp.task 'sprite-production', ->
+  spriteData = gulp.src(config.paths.images.sprite.src).pipe(plugins.plumber())
+    .pipe plugins.duration('sprite production compilation')
+    .pipe(spritesmith(
+      imgName: 'sprite.png'
+      cssName: 'sprite.sass'
+      imgPath: '../images/sprite.png'
+      cssFormat: 'sass'
+      padding: 10
+      algorithm: 'binary-tree'
+    ))
+
+  spriteData.img
+    .pipe plugins.plumber()
+    .pipe plugins.duration('sprite production images compilation')
+    .pipe gulp.dest config.paths.images.sprite.production_compile_images
+    .pipe plugins.connect.reload()
+  spriteData.css
+    .pipe plugins.plumber()
+    .pipe plugins.duration('sprite production styles compilation')
+    .pipe gulp.dest config.paths.images.sprite.production_compile_styles
+    .pipe plugins.connect.reload()
+
 
 # base64 images
 gulp.task 'base64-develop', ->
@@ -105,5 +128,6 @@ gulp.task 'default', [
 
 gulp.task 'production', [
   'jade-production'
+  'sprite-production'
   'sass-production'
 ]
