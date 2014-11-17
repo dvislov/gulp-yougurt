@@ -29,6 +29,7 @@
     "gulp-autoprefixer": "^1.0.1",
     "gulp-base64": "^0.1.2",
     "gulp-connect": "^2.0.6",
+    "gulp-copy": "0.0.2",
     "gulp-csso": "^0.2.9",
     "gulp-duration": "0.0.0",
     "gulp-jade": "^0.8.0",

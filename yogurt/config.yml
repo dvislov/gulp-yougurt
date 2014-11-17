@@ -26,3 +26,7 @@ paths:
       develop_src: '../develop/css/*.css'
       develop_compile: '../develop/css'
       base_dir: '../develop/images'
+    static:
+      src: '../src/assets/images/**.*'
+      develop: '../develop/images/'
+      production: '../production/images/'

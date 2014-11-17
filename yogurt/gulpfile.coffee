@@ -114,11 +114,21 @@ gulp.task 'base64-develop', ->
     .pipe gulp.dest config.paths.images.base64.develop_compile
 
 
+# copy static assets
+gulp.task 'copy-static-images-develop', ->
+  gulp.src config.paths.images.static.src
+    .pipe gulp.dest config.paths.images.static.develop
+gulp.task 'copy-static-images-production', ->
+  gulp.src config.paths.images.static.src
+    .pipe gulp.dest config.paths.images.static.production
+
+
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade-develop']
   gulp.watch config.paths.jade.src_shared, ['jade-develop']
   gulp.watch config.paths.sass.base, ['sass-develop', 'base64-develop']
   gulp.watch config.paths.images.sprite.src, ['sprite-develop', 'sass-develop']
+  gulp.watch config.paths.images.static.src_path, ['copy-static-images-develop']
   return
 
 gulp.task 'default', [
@@ -126,7 +136,12 @@ gulp.task 'default', [
   'watch'
 ]
 
+gulp.task 'assets-develop', [
+  'copy-static-images-develop'
+]
+
 gulp.task 'production', [
+  'copy-static-images-production'
   'jade-production'
   'sprite-production'
   'sass-production'
