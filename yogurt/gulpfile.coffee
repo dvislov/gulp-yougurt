@@ -63,6 +63,7 @@ gulp.task 'sprite-develop', ->
     .pipe(spritesmith(
       imgName: 'sprite.png'
       cssName: 'sprite.sass'
+      imgPath: '../images/sprite.png'
       cssFormat: 'sass'
       padding: 10
       algorithm: 'binary-tree'
@@ -80,10 +81,20 @@ gulp.task 'sprite-develop', ->
     .pipe plugins.connect.reload()
 
 
+# base64 images
+gulp.task 'base64-develop', ->
+  gulp.src config.paths.images.base64.develop_src
+    .pipe plugins.base64
+      baseDir: config.paths.images.base64.base_dir
+      extensions: ['gif', 'jpg', 'png']
+      debug: true
+    .pipe gulp.dest config.paths.images.base64.develop_compile
+
+
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade-develop']
   gulp.watch config.paths.jade.src_shared, ['jade-develop']
-  gulp.watch config.paths.sass.base, ['sass-develop']
+  gulp.watch config.paths.sass.base, ['sass-develop', 'base64-develop']
   gulp.watch config.paths.images.sprite.src, ['sprite-develop', 'sass-develop']
   return
 

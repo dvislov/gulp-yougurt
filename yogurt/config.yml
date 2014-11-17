@@ -20,3 +20,7 @@ paths:
       src: '../src/assets/images/sprite/*.png'
       develop_compile_images: '../develop/images'
       develop_compile_styles: '../src/assets/stylesheets/'
+    base64:
+      develop_src: '../develop/css/*.css'
+      develop_compile: '../develop/css'
+      base_dir: '../develop/images'
