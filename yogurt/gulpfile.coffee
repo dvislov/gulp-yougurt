@@ -104,16 +104,6 @@ gulp.task 'sprite-production', ->
     .pipe plugins.connect.reload()
 
 
-# base64 images
-gulp.task 'base64-develop', ->
-  gulp.src config.paths.images.base64.develop_src
-    .pipe plugins.base64
-      baseDir: config.paths.images.base64.base_dir
-      extensions: ['gif', 'jpg', 'png']
-      debug: true
-    .pipe gulp.dest config.paths.images.base64.develop_compile
-
-
 # copy static assets
 gulp.task 'copy-static-images-develop', ->
   gulp.src config.paths.images.static.src

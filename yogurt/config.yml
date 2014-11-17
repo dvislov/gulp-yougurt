@@ -22,10 +22,6 @@ paths:
       develop_compile_styles: '../src/assets/stylesheets/'
       production_compile_images: '../production/images'
       production_compile_styles: '../src/assets/stylesheets/'
-    base64:
-      develop_src: '../develop/css/*.css'
-      develop_compile: '../develop/css'
-      base_dir: '../develop/images'
     static:
       src: '../src/assets/images/**.*'
       develop: '../develop/images/'
