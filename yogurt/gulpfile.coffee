@@ -65,27 +65,16 @@ gulp.task 'sprite', ->
     .pipe plugins.connect.reload()
 
 
-# copy static assets
-gulp.task 'copy-static-images-develop', ->
-  gulp.src config.paths.images.static.src
-    .pipe gulp.dest config.paths.images.static.develop
-
-
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade']
   gulp.watch config.paths.jade.src_shared, ['jade']
   gulp.watch config.paths.stylus.base, ['stylus']
   gulp.watch config.paths.images.sprite.src, ['sprite', 'stylus']
-  gulp.watch config.paths.images.static.src_path, ['copy-static-images-develop']
   return
 
 gulp.task 'default', [
   'connect'
   'watch'
-]
-
-gulp.task 'assets-develop', [
-  'copy-static-images-develop'
 ]
 
 gulp.task 'production', []
