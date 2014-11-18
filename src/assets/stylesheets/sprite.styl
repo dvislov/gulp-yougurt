@@ -1,0 +1,74 @@
+/*
+Stylus variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon_home_width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon_home = x y offset_x offset_y width height total_width total_height image_path;
+*/
+$stat-image-paper_x = 0px;
+$stat-image-paper_y = 0px;
+$stat-image-paper_offset_x = 0px;
+$stat-image-paper_offset_y = 0px;
+$stat-image-paper_width = 69px;
+$stat-image-paper_height = 68px;
+$stat-image-paper_total_width = 148px;
+$stat-image-paper_total_height = 146px;
+$stat-image-paper_image = '../images/sprite.png';
+$stat-image-paper = 0px 0px 0px 0px 69px 68px 148px 146px '../images/sprite.png';
+$stat-image-rock_x = 79px;
+$stat-image-rock_y = 0px;
+$stat-image-rock_offset_x = -79px;
+$stat-image-rock_offset_y = 0px;
+$stat-image-rock_width = 69px;
+$stat-image-rock_height = 68px;
+$stat-image-rock_total_width = 148px;
+$stat-image-rock_total_height = 146px;
+$stat-image-rock_image = '../images/sprite.png';
+$stat-image-rock = 79px 0px -79px 0px 69px 68px 148px 146px '../images/sprite.png';
+$stat-image-scissors_x = 0px;
+$stat-image-scissors_y = 78px;
+$stat-image-scissors_offset_x = 0px;
+$stat-image-scissors_offset_y = -78px;
+$stat-image-scissors_width = 69px;
+$stat-image-scissors_height = 68px;
+$stat-image-scissors_total_width = 148px;
+$stat-image-scissors_total_height = 146px;
+$stat-image-scissors_image = '../images/sprite.png';
+$stat-image-scissors = 0px 78px 0px -78px 69px 68px 148px 146px '../images/sprite.png';
+
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  spriteWidth($icon_home)
+}
+
+.icon-email {
+  sprite($icon_email)
+}
+*/
+spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteImage($sprite) {
+  background-image: url($sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}
