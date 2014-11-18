@@ -64,12 +64,24 @@ gulp.task 'sprite', ->
     .pipe gulp.dest config.paths.images.sprite.develop_compile_styles
     .pipe plugins.connect.reload()
 
+# CoffeeScript
+gulp.task 'coffee', ->
+  gulp.src config.paths.coffee.src
+  .pipe plugins.coffee()
+  .pipe plugins.plumber()
+  .pipe plugins.duration('coffeescript compilation')
+  .pipe gulp.dest config.paths.coffee.dest
+  .pipe plugins.connect.reload()
+
 
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade']
   gulp.watch config.paths.jade.src_shared, ['jade']
+
   gulp.watch config.paths.stylus.base, ['stylus']
   gulp.watch config.paths.images.sprite.src, ['sprite', 'stylus']
+
+  gulp.watch config.paths.coffee.watch, ['coffee']
   return
 
 gulp.task 'default', [

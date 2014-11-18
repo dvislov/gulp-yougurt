@@ -13,6 +13,11 @@ paths:
     src: '../src/assets/stylesheets/application.styl'
     develop_compile: '../develop/css'
 
+  coffee:
+    watch: '../src/assets/javascripts/*.coffee'
+    src: '../src/assets/javascripts/application.coffee'
+    dest: '../develop/js/'
+
   images:
     sprite:
       src: '../src/assets/images/sprite/*.png'
