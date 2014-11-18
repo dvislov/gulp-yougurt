@@ -26,13 +26,13 @@ gulp.task 'jade-develop', ->
 
 # Styles compilation
 
-gulp.task 'sass-develop', ->
-  gulp.src config.paths.sass.src
+gulp.task 'stylus', ->
+  gulp.src config.paths.stylus.src
     .pipe plugins.plumber()
-    .pipe plugins.rubySass()
+    .pipe plugins.stylus()
     .pipe plugins.autoprefixer()
-    .pipe plugins.duration('sass develop compilation')
-    .pipe gulp.dest config.paths.sass.develop_compile
+    .pipe plugins.duration('stylus compilation')
+    .pipe gulp.dest config.paths.stylus.develop_compile
     .pipe plugins.connect.reload()
 
 
@@ -73,7 +73,7 @@ gulp.task 'copy-static-images-develop', ->
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade-develop']
   gulp.watch config.paths.jade.src_shared, ['jade-develop']
-  gulp.watch config.paths.sass.base, ['sass-develop', 'base64-develop']
+  gulp.watch config.paths.stylus.base, ['stylus']
   gulp.watch config.paths.images.sprite.src, ['sprite-develop', 'sass-develop']
   gulp.watch config.paths.images.static.src_path, ['copy-static-images-develop']
   return

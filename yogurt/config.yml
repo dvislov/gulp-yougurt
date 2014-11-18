@@ -7,22 +7,17 @@ paths:
     src: '../src/templates/*.jade'
     src_shared: '../src/templates/shared/*.jade'
     develop_compile: '../develop'
-    develop_production: '../production'
 
-  sass:
-    base: '../src/assets/stylesheets/*.sass'
-    src: '../src/assets/stylesheets/application.sass'
+  stylus:
+    base: '../src/assets/stylesheets/*.styl'
+    src: '../src/assets/stylesheets/application.styl'
     develop_compile: '../develop/css'
-    production_compile: '../production/css'
 
   images:
     sprite:
       src: '../src/assets/images/sprite/*.png'
       develop_compile_images: '../develop/images'
       develop_compile_styles: '../src/assets/stylesheets/'
-      production_compile_images: '../production/images'
-      production_compile_styles: '../src/assets/stylesheets/'
     static:
       src: '../src/assets/images/**.*'
       develop: '../develop/images/'
-      production: '../production/images/'
