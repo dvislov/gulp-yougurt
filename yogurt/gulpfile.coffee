@@ -25,13 +25,18 @@ gulp.task 'jade', ->
 
 
 # Styles compilation
+# TODO: make vendor compilation first
 
 gulp.task 'stylus', ->
-  gulp.src config.paths.stylus.src
+  filter = plugins.filter('*.styl')
+  gulp.src [config.paths.stylus.src, config.paths.vendor.css.src]
     .pipe plugins.plumber()
+    .pipe filter
     .pipe plugins.stylus()
     .pipe plugins.autoprefixer()
     .pipe plugins.duration('stylus compilation')
+    .pipe filter.restore()
+    .pipe plugins.concat('application.css')
     .pipe gulp.dest config.paths.stylus.develop_compile
     .pipe plugins.connect.reload()
 
@@ -72,7 +77,6 @@ gulp.task 'coffee', ->
   .pipe plugins.duration('coffeescript compilation')
   .pipe gulp.dest config.paths.coffee.dest
   .pipe plugins.connect.reload()
-
 
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade']

@@ -23,3 +23,7 @@ paths:
       src: '../src/assets/images/sprite/*.png'
       develop_compile_images: '../develop/images'
       develop_compile_styles: '../src/assets/stylesheets/'
+
+  vendor:
+    css:
+      src: '../src/vendor/stylesheets/*.css'
