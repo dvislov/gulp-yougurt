@@ -25,20 +25,38 @@ gulp.task 'jade', ->
 
 
 # Styles compilation
-# TODO: make vendor compilation first
-
 gulp.task 'stylus', ->
-  filter = plugins.filter('*.styl')
+
+  stylusFilter = plugins.filter('*.styl')
+  cssFilter = plugins.filter('*.css')
+
   gulp.src [config.paths.stylus.src, config.paths.vendor.css.src]
-    .pipe plugins.plumber()
-    .pipe filter
+    .pipe cssFilter
+    .pipe plugins.concat('vendor.css')
+    .pipe cssFilter.restore()
+
+    .pipe stylusFilter
     .pipe plugins.stylus()
     .pipe plugins.autoprefixer()
+    .pipe plugins.concat('stylus.css')
+    .pipe stylusFilter.restore()
+
     .pipe plugins.duration('stylus compilation')
-    .pipe filter.restore()
-    .pipe plugins.concat('application.css')
+    .pipe plugins.plumber()
+
     .pipe gulp.dest config.paths.stylus.develop_compile
-    .pipe plugins.connect.reload()
+
+gulp.task 'styles-pipeline', ->
+  gulp.src [config.paths.vendor.css.concat, config.paths.stylus.compile]
+    .pipe plugins.concat('application.css')
+    .pipe plugins.duration('stylus + vendor compilation')
+    .pipe plugins.plumber()
+    .pipe gulp.dest config.paths.stylus.develop_compile
+
+gulp.task 'remove-tmp-styles', ->
+  gulp.src [config.paths.vendor.css.concat, config.paths.stylus.compile]
+    .pipe plugins.clean
+      force: true
 
 
 # Compile images sprite
@@ -82,8 +100,9 @@ gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade']
   gulp.watch config.paths.jade.src_shared, ['jade']
 
-  gulp.watch config.paths.stylus.base, ['stylus']
-  gulp.watch config.paths.images.sprite.src, ['sprite', 'stylus']
+  gulp.watch config.paths.stylus.base, ['stylus', 'styles-pipeline', 'remove-tmp-styles']
+  gulp.watch config.paths.images.sprite.src, ['sprite', 'stylus', 'styles-pipeline', 'remove-tmp-styles']
+  gulp.watch config.paths.vendor.css.src, ['stylus', 'styles-pipeline', 'remove-tmp-styles']
 
   gulp.watch config.paths.coffee.watch, ['coffee']
   return

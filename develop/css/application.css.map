@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,IAAI;EACF,gBAAgB,EAAE,IAAI;EACtB,UAAU,EAAE,WAAW;;ACFzB,IAAI;EACF,KAAK,EAAE,OAAO;EACd,UAAU,EAAE,6BAA6B;;;;;;;;;;;;;;;;;;ADK3C,YAAY;EEuDV,gBAAgB,EAAE,yBAAqB;EAJvC,mBAAmB,EAAE,OAAkC;EARvD,KAAK,EAhC4B,IAAI;EAmCrC,MAAM,EAnCgC,IAAI",
-"sources": ["../application.sass","../../../../../../../Users/user/undev/gulp-yougurt/src/assets/stylesheets/main.sass","../../../../../../../Users/user/undev/gulp-yougurt/src/assets/stylesheets/sprite.sass"],
-"names": [],
-"file": "application.css"
-}

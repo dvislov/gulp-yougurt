@@ -11,6 +11,7 @@ paths:
   stylus:
     base: '../src/assets/stylesheets/*.styl'
     src: '../src/assets/stylesheets/application.styl'
+    compile: '../develop/css/stylus.css'
     develop_compile: '../develop/css'
 
   coffee:
@@ -27,3 +28,7 @@ paths:
   vendor:
     css:
       src: '../src/vendor/stylesheets/*.css'
+      concat: '../develop/css/vendor.css'
+
+compile:
+  css: '../develop/css/application.css'
