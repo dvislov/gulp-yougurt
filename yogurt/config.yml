@@ -25,6 +25,10 @@ paths:
       develop_compile_images: '../develop/images'
       develop_compile_styles: '../src/assets/stylesheets/'
 
+  fonts:
+    src: '../src/assets/fonts/**.*'
+    dest: '../develop/fonts'
+
   vendor:
     css:
       src: '../src/vendor/stylesheets/*.css'

@@ -56,6 +56,14 @@ gulp.task('coffee', function() {
   return gulp.src(config.paths.coffee.src).pipe(plugins.coffee()).pipe(plugins.plumber()).pipe(plugins.duration('coffeescript compilation')).pipe(gulp.dest(config.paths.coffee.dest)).pipe(plugins.connect.reload());
 });
 
+gulp.task('fonts-assets', function() {
+  return gulp.src(config.paths.fonts.src).pipe(plugins.syncFiles({
+    name: 'fonts',
+    src: config.paths.fonts.src,
+    dest: config.paths.fonts.dest
+  })).pipe(plugins.plumber()).pipe(plugins.duration('Fonts assets sync')).pipe(gulp.dest(config.paths.fonts.dest));
+});
+
 gulp.task('watch', function() {
   gulp.watch(config.paths.jade.src, ['jade']);
   gulp.watch(config.paths.jade.src_shared, ['jade']);
@@ -63,6 +71,7 @@ gulp.task('watch', function() {
   gulp.watch(config.paths.images.sprite.src, ['sprite', 'stylus']);
   gulp.watch(config.paths.vendor.css.src, ['stylus']);
   gulp.watch(config.paths.coffee.watch, ['coffee']);
+  gulp.watch(config.paths.fonts.src, ['fonts-assets']);
 });
 
 gulp.task('default', ['connect', 'watch']);

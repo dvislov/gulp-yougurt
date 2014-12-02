@@ -78,6 +78,7 @@ gulp.task 'sprite', ->
 
 
 # CoffeeScript
+
 gulp.task 'coffee', ->
   gulp.src config.paths.coffee.src
   .pipe plugins.coffee()
@@ -85,6 +86,22 @@ gulp.task 'coffee', ->
   .pipe plugins.duration('coffeescript compilation')
   .pipe gulp.dest config.paths.coffee.dest
   .pipe plugins.connect.reload()
+
+
+# Copy static assets
+gulp.task 'fonts-assets', ->
+  gulp.src config.paths.fonts.src
+    .pipe plugins.syncFiles
+      name: 'fonts'
+      src: config.paths.fonts.src
+      dest: config.paths.fonts.dest
+
+    .pipe plugins.plumber()
+    .pipe plugins.duration('Fonts assets sync')
+
+    .pipe gulp.dest config.paths.fonts.dest
+
+# Watchers
 
 gulp.task 'watch', ->
   gulp.watch config.paths.jade.src, ['jade']
@@ -95,6 +112,8 @@ gulp.task 'watch', ->
   gulp.watch config.paths.vendor.css.src, ['stylus']
 
   gulp.watch config.paths.coffee.watch, ['coffee']
+
+  gulp.watch config.paths.fonts.src, ['fonts-assets']
   return
 
 
