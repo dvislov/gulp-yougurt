@@ -2,15 +2,18 @@ fs = require 'fs'
 streamqueue = require 'streamqueue'
 gulp = require 'gulp'
 yaml = require 'js-yaml'
-plugins = require("gulp-load-plugins")()
+connect = require('gulp-connect-multi')()
+plugins = require('gulp-load-plugins')()
 
 config = yaml.load(fs.readFileSync("config.yml", "utf8"))
 
-gulp.task 'connect', ->
-  plugins.connect.server
-    root: config.webserver.root_path
-    port: config.webserver.port
-    livereload: true
+gulp.task 'connect', connect.server(
+  root: [config.webserver.root_path]
+  port: config.webserver.port
+  livereload: true
+  open:
+    browser: 'Google Chrome'
+)
 
 
 # Templates compilation
@@ -70,6 +73,7 @@ gulp.task 'sprite', ->
     .pipe gulp.dest config.paths.images.sprite.develop_compile_styles
     .pipe plugins.connect.reload()
 
+
 # CoffeeScript
 gulp.task 'coffee', ->
   gulp.src config.paths.coffee.src
@@ -90,9 +94,8 @@ gulp.task 'watch', ->
   gulp.watch config.paths.coffee.watch, ['coffee']
   return
 
+
 gulp.task 'default', [
   'connect'
   'watch'
 ]
-
-gulp.task 'production', []

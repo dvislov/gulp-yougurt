@@ -436,7 +436,7 @@ body {
           transition: all 1s ease;
 }
 h1 {
-  color: #ff0;
+  color: #f00;
 }
 .sprite-test {
   background-image: url("../images/sprite.png");
