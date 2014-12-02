@@ -25,7 +25,8 @@ gulp.task 'jade', ->
       pretty: true
     .pipe plugins.duration('jade templates compile')
     .pipe gulp.dest config.paths.jade.develop_compile
-    .pipe plugins.connect.reload()
+
+    .pipe connect.reload()
 
 
 # Styles compilation
@@ -43,6 +44,8 @@ gulp.task 'stylus', ->
 
   .pipe plugins.concat('application.css')
   .pipe gulp.dest config.paths.stylus.develop_compile
+
+  .pipe connect.reload()
 
 
 # Compile images sprite

@@ -27,13 +27,13 @@ gulp.task('connect', connect.server({
 gulp.task('jade', function() {
   return gulp.src(config.paths.jade.src).pipe(plugins.plumber()).pipe(plugins.jade({
     pretty: true
-  })).pipe(plugins.duration('jade templates compile')).pipe(gulp.dest(config.paths.jade.develop_compile)).pipe(plugins.connect.reload());
+  })).pipe(plugins.duration('jade templates compile')).pipe(gulp.dest(config.paths.jade.develop_compile)).pipe(connect.reload());
 });
 
 gulp.task('stylus', function() {
   return streamqueue({
     objectMode: true
-  }, gulp.src(config.paths.vendor.css.src), gulp.src(config.paths.stylus.src).pipe(plugins.stylus()).pipe(plugins.autoprefixer())).pipe(plugins.duration('stylus compilation')).pipe(plugins.plumber()).pipe(plugins.concat('application.css')).pipe(gulp.dest(config.paths.stylus.develop_compile));
+  }, gulp.src(config.paths.vendor.css.src), gulp.src(config.paths.stylus.src).pipe(plugins.stylus()).pipe(plugins.autoprefixer())).pipe(plugins.duration('stylus compilation')).pipe(plugins.plumber()).pipe(plugins.concat('application.css')).pipe(gulp.dest(config.paths.stylus.develop_compile)).pipe(connect.reload());
 });
 
 spritesmith = require('gulp.spritesmith');
