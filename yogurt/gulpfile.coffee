@@ -53,7 +53,7 @@ spritesmith = require 'gulp.spritesmith'
 # TODO: make this require from gulp-load-plugins
 
 gulp.task 'sprite', ->
-  spriteData = gulp.src(config.paths.images.sprite.src).pipe(plugins.plumber())
+  spriteData = gulp.src(config.paths.sprite.src).pipe(plugins.plumber())
     .pipe plugins.duration('sprite develop compilation')
     .pipe plugins.plumber()
     .pipe(spritesmith(
@@ -68,12 +68,12 @@ gulp.task 'sprite', ->
   spriteData.img
     .pipe plugins.plumber()
     .pipe plugins.duration('sprite images compilation')
-    .pipe gulp.dest config.paths.images.sprite.develop_compile_images
+    .pipe gulp.dest config.paths.sprite.develop_compile_images
     .pipe plugins.connect.reload()
   spriteData.css
     .pipe plugins.plumber()
     .pipe plugins.duration('sprite styles compilation')
-    .pipe gulp.dest config.paths.images.sprite.develop_compile_styles
+    .pipe gulp.dest config.paths.sprite.develop_compile_styles
     .pipe plugins.connect.reload()
 
 
@@ -101,6 +101,18 @@ gulp.task 'fonts-assets', ->
 
     .pipe gulp.dest config.paths.fonts.dest
 
+gulp.task 'images-assets', ->
+  gulp.src config.paths.images.src
+    .pipe plugins.syncFiles
+      name: 'images'
+      src: config.paths.images.src
+      dest: config.paths.images.dest
+
+    .pipe plugins.plumber()
+    .pipe plugins.duration('Images assets sync')
+
+    .pipe gulp.dest config.paths.images.dest
+
 # Watchers
 
 gulp.task 'watch', ->
@@ -108,12 +120,13 @@ gulp.task 'watch', ->
   gulp.watch config.paths.jade.src_shared, ['jade']
 
   gulp.watch config.paths.stylus.base, ['stylus']
-  gulp.watch config.paths.images.sprite.src, ['sprite', 'stylus']
+  gulp.watch config.paths.sprite.src, ['sprite', 'stylus']
   gulp.watch config.paths.vendor.css.src, ['stylus']
 
   gulp.watch config.paths.coffee.watch, ['coffee']
 
   gulp.watch config.paths.fonts.src, ['fonts-assets']
+  gulp.watch config.paths.images.src, ['images-assets']
   return
 
 

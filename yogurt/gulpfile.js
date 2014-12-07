@@ -40,7 +40,7 @@ spritesmith = require('gulp.spritesmith');
 
 gulp.task('sprite', function() {
   var spriteData;
-  spriteData = gulp.src(config.paths.images.sprite.src).pipe(plugins.plumber()).pipe(plugins.duration('sprite develop compilation')).pipe(plugins.plumber()).pipe(spritesmith({
+  spriteData = gulp.src(config.paths.sprite.src).pipe(plugins.plumber()).pipe(plugins.duration('sprite develop compilation')).pipe(plugins.plumber()).pipe(spritesmith({
     imgName: 'sprite.png',
     cssName: 'sprite.styl',
     imgPath: '../images/sprite.png',
@@ -48,8 +48,8 @@ gulp.task('sprite', function() {
     padding: 10,
     algorithm: 'binary-tree'
   }));
-  spriteData.img.pipe(plugins.plumber()).pipe(plugins.duration('sprite images compilation')).pipe(gulp.dest(config.paths.images.sprite.develop_compile_images)).pipe(plugins.connect.reload());
-  return spriteData.css.pipe(plugins.plumber()).pipe(plugins.duration('sprite styles compilation')).pipe(gulp.dest(config.paths.images.sprite.develop_compile_styles)).pipe(plugins.connect.reload());
+  spriteData.img.pipe(plugins.plumber()).pipe(plugins.duration('sprite images compilation')).pipe(gulp.dest(config.paths.sprite.develop_compile_images)).pipe(plugins.connect.reload());
+  return spriteData.css.pipe(plugins.plumber()).pipe(plugins.duration('sprite styles compilation')).pipe(gulp.dest(config.paths.sprite.develop_compile_styles)).pipe(plugins.connect.reload());
 });
 
 gulp.task('coffee', function() {
@@ -64,14 +64,23 @@ gulp.task('fonts-assets', function() {
   })).pipe(plugins.plumber()).pipe(plugins.duration('Fonts assets sync')).pipe(gulp.dest(config.paths.fonts.dest));
 });
 
+gulp.task('images-assets', function() {
+  return gulp.src(config.paths.images.src).pipe(plugins.syncFiles({
+    name: 'images',
+    src: config.paths.images.src,
+    dest: config.paths.images.dest
+  })).pipe(plugins.plumber()).pipe(plugins.duration('Images assets sync')).pipe(gulp.dest(config.paths.images.dest));
+});
+
 gulp.task('watch', function() {
   gulp.watch(config.paths.jade.src, ['jade']);
   gulp.watch(config.paths.jade.src_shared, ['jade']);
   gulp.watch(config.paths.stylus.base, ['stylus']);
-  gulp.watch(config.paths.images.sprite.src, ['sprite', 'stylus']);
+  gulp.watch(config.paths.sprite.src, ['sprite', 'stylus']);
   gulp.watch(config.paths.vendor.css.src, ['stylus']);
   gulp.watch(config.paths.coffee.watch, ['coffee']);
   gulp.watch(config.paths.fonts.src, ['fonts-assets']);
+  gulp.watch(config.paths.images.src, ['images-assets']);
 });
 
 gulp.task('default', ['connect', 'watch']);
